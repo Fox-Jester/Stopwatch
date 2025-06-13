@@ -1,44 +1,17 @@
 
 
-
-function Stopwatch(){
-
-    let isCounting = false
-
-    this.duration = 0
-    let startTime, endTime = 0
-    
-
-    this.start = () => {
-        if(!isCounting){
-            startTime = new Date()
-            isCounting = true;
-        }
-        else{
-            return Error("Stopwatch has already started.")
-        }
-        
-    }
-
-    this.stop = () => {
-        if(isCounting){
-            isCounting = false
-            endTime = new Date()
-
-            this.duration = ((endTime - startTime) / 1000);
-
-        }
-    }
-
-
-    this.reset = () => {
-        isCounting = false;
-        this.duration = 0;
-    }
+function Shape(size){
+    this.size = size;
 }
 
+Shape.prototype.expolode = () => {
+    console.log("boom!");
+}
 
+function Circle(color){
+    this.color = color;
+}
 
+Circle.prototype = Object.create(Shape.prototype);
 
-const sw = new Stopwatch()
-
+const c = new Circle;
