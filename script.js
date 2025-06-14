@@ -1,17 +1,26 @@
 
 
-function Shape(size){
-    this.size = size;
+
+function htmlElement(){
+    this.click = () => {
+        console.log("clicked")
+    }
 }
 
-Shape.prototype.expolode = () => {
-    console.log("boom!");
+htmlElement.prototype.focus = () => {
+    console.log("focused")
 }
 
-function Circle(color){
-    this.color = color;
+function htmlSelectElement(...array){
+    this.items = [...array];
+    this.addItem = (item) => {
+        this.items.push(item);
+    }
+    this.removeItem = (item) => {
+        this.items = this.items.filter(i => i !== item);
+    }
 }
 
-Circle.prototype = Object.create(Shape.prototype);
+htmlSelectElement.prototype = new htmlElement;
 
-const c = new Circle;
+const selectEl = new htmlSelectElement("wam", "bam", "tam");
