@@ -1,64 +1,31 @@
 
 
-function extend(child, parent){
-    child.prototype = Object.create(parent.prototype);
-    child.prototype.constructor = child;
-}
 
-function htmlElement(){
-    this.click = () => {
-        console.log("clicked")
+class Stack{
+    #_storage = []
+    constructor(){
+        this.count = 0
+        
     }
-}
-
-htmlElement.prototype.focus = () => {
-    console.log("focused")
-}
-
-htmlElement.prototype.render = () => {
-    console.log("render rawr!")
-}
-
-function htmlSelectElement(...items){
-    this.items = [...items];
-    this.addItem = (item) => {
-        this.items.push(item);
+    push(value){
+        this.count++
+        this.#_storage.push(value);
+        console.log(this.#_storage)
     }
-    this.removeItem = (item) => {
-        this.items = this.items.filter(i => i !== item);
+    pop(){
+        if(this.#_storage.length === 0){
+            throw new Error("stack empty yo")
+        }
+        this.count--
+        return this.#_storage.pop();
     }
-}
-function htmlImgElement(src){
-    this.src = src
-}
-
-htmlImgElement.prototype = new htmlElement()
-htmlSelectElement.prototype = new htmlElement()
-
-htmlSelectElement.prototype.render = function() {
-    const select = document.createElement("select");
-
-    this.items.forEach((item) => {
-        const option = document.createElement("option");
-        option.innerHTML = item.toString();
-        select.appendChild(option);
-    })
-    
-    return select
-   
+    peek(){
+        if(this.#_storage.length === 0){
+            throw new Error("stack empty yo")
+        }
+        return this.#_storage.at(-1);
+    }
+  
 }
 
-htmlImgElement.prototype.render = function() {
-    const img = document.createElement("img");
-    img.src = this.src;
-    return img
-}
-
-const elements = [
-    new htmlImgElement("https//lmao"),
-    new htmlSelectElement("wam", "bam", "tam")
-]
-
-for(let element of elements){
-    console.log(element.render());
-}
+const st = new Stack;
